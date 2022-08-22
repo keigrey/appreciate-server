@@ -13,6 +13,7 @@ exports.up = function (knex) {
       .onDelete("CASCADE");
     table.string("title", 72).notNullable();
     table.string("text", 500).notNullable();
+    table.date("date").notNullable();
     table.timestamps(true, true);
   });
 };
