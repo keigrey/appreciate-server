@@ -5,7 +5,11 @@ const PORT = 8080;
 
 app.use(express.json());
 app.use(express.static("public"));
-app.use(cors({ origin: ["http://localhost:3000", "http://heroku.com"] }));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://app-reciate.herokuapp.com"],
+  })
+);
 // for multiple use array
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
