@@ -25,4 +25,23 @@ module.exports = {
       res.status(500).send();
     }
   },
+
+  async loginUser(req, res) {
+    const receivedData = req.body;
+
+    const [userData] = await userModel.getUserByEmail(receivedData);
+
+    if (!userData) {
+      return res.status(404).send("Cannot find user");
+    }
+    try {
+      if (await bcrypt.compare(receivedData.password, userData.password)) {
+        res.send("SUCCESS");
+      } else {
+        res.send("NOT ALLOWED");
+      }
+    } catch {
+      res.status(500).send();
+    }
+  },
 };
