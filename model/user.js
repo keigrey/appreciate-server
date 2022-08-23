@@ -12,7 +12,7 @@ module.exports = {
 
   getUserByEmail(userData) {
     return knex
-      .select("email", "password")
+      .select("id", "email", "password")
       .from(TABLE_NAME)
       .where({ email: userData.email });
   },
