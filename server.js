@@ -4,6 +4,7 @@ const app = express();
 const PORT = 8080;
 
 app.use(express.json());
+app.use(express.static("public"));
 app.use(cors({ origin: ["http://localhost:3000", "http://heroku.com"] }));
 // for multiple use array
 
