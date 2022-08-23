@@ -1,5 +1,7 @@
+require("dotenv").config();
 const userModel = require("../model/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   async addUser(req, res) {
@@ -36,7 +38,11 @@ module.exports = {
     }
     try {
       if (await bcrypt.compare(receivedData.password, userData.password)) {
-        res.send("SUCCESS");
+        // SUCCESSFUL
+        const userId = { id: userData.id };
+        const accessToken = jwt.sign(userId, process.env.ACCESS_TOKEN_SECRET);
+
+        res.status(200).json({ accessToken });
       } else {
         res.send("NOT ALLOWED");
       }
