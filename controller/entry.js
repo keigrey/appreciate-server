@@ -17,7 +17,7 @@ module.exports = {
         if (error) {
           return res.status(403).send("BAD TOKEN K");
         }
-        req.body = { id: decodedToken.id };
+        req.body.user_id = decodedToken.id;
 
         next();
       }
@@ -26,10 +26,13 @@ module.exports = {
 
   async addEntry(req, res) {
     const entryData = await req.body;
-    // await entryModel.addEntry(entryData);
-    // console.log("📗📗📗📗📗📗📗📗📗📗");
-    // console.log(entryData);
-    res.status(201).send(`DEKITA ID: ${entryData.id}`);
+
+    try {
+      await entryModel.addEntry(entryData);
+      res.status(201).send(`Added successfully`);
+    } catch {
+      res.status(500).send();
+    }
   },
 
   async getAllEntries(req, res) {

@@ -5,12 +5,14 @@ const TABLE_NAME = "entry";
 module.exports = {
   TABLE_NAME,
 
-  getAllUserEntries({ id }) {
-    console.log("🐽🐽🐽🐽🐽🐽🐽");
-    console.log(id);
+  getAllUserEntries({ user_id }) {
     return knex
       .select("id", "title", "text", "date")
       .from(TABLE_NAME)
-      .where({ user_id: id });
+      .where({ user_id: user_id });
+  },
+
+  addEntry(entryData) {
+    return knex.insert(entryData).into(TABLE_NAME);
   },
 };
