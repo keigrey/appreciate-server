@@ -6,8 +6,7 @@ module.exports = {
     const userData = req.body;
 
     try {
-      const salt = await bcrypt.genSalt();
-      const hashedPassword = await bcrypt.hash(userData.password, salt);
+      const hashedPassword = await bcrypt.hash(userData.password, 10);
 
       const userDataToStore = {
         first_name: userData.first_name,
